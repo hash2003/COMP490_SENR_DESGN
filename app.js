@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 5001;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Needed to parse form data
+app.use(express.static('public')); // To serve static files
 
 // Session Middleware
 app.use(session({
