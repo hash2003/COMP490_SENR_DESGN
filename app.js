@@ -36,7 +36,7 @@ const config = {
   AUTHORIZATION_ENDPOINT: 'http://localhost:8080/realms/master/protocol/openid-connect/auth',
   REDIRECT_URI: 'http://localhost:5001/cb',
   CLIENT_ID: 'kanban-board-project',
-  CLIENT_SECRET: 'Vi5agaux6IKKzw15VAcCWrteQngdakj6',
+  CLIENT_SECRET: '0kZ3nc2DRfDPV97kVVBYSmhPGTu9aLrj',
   SCOPES: 'openid',
   TOKEN_ENDPOINT: 'http://localhost:8080/realms/master/protocol/openid-connect/token',
 };
