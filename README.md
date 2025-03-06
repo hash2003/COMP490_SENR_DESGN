@@ -14,7 +14,7 @@ I have used Redux, TailwindCSS and dnd-kit library for drag and drop operations.
 ```
 git clone https://github.com/barishazar3431/react-kanban-board
 
-cd react-kanban-board
+cd desktop\comp 491\matadorboard local setup\react-kanban-board
 
 npm install
 

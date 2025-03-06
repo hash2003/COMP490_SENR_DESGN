@@ -122,7 +122,7 @@ function KanbanColumn({ column }: Props) {
           className="flex items-center gap-2 py-2 px-4 hover:text-white transition"
         >
           <FaPlusCircle />
-          <span>Create Task</span>
+          <span>Add New Task</span>
         </button>
       </div>
     </div>

@@ -7,30 +7,30 @@ import {
   MouseSensor,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   horizontalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { useEffect, useMemo, useState } from 'react';
-import { Column, Task, kanbanActions } from '../store/kanbanSlice';
-import { useAppDispatch, useAppSelector } from '../util/reduxHooks';
-import KanbanColumn from './KanbanColumn';
-import KanbanTaskItem from './KanbanTaskItem';
-import { getParentIdOfTask } from '../util/kanbanUtils';
+} from "@dnd-kit/sortable";
+import { useEffect, useMemo, useState } from "react";
+import { Column, Task, kanbanActions } from "../store/kanbanSlice";
+import { useAppDispatch, useAppSelector } from "../util/reduxHooks";
+import KanbanColumn from "./KanbanColumn";
+import KanbanTaskItem from "./KanbanTaskItem";
+import { getParentIdOfTask } from "../util/kanbanUtils";
 
 function KanbanBoard() {
   const columns = useAppSelector((state) => state.kanban.columns);
   const columnIds = useMemo(
     () => columns.map((column) => column.id),
-    [columns]
+    [columns],
   );
   const dispatch = useAppDispatch();
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
   useEffect(() => {
-    localStorage.setItem('columns', JSON.stringify(columns));
+    localStorage.setItem("columns", JSON.stringify(columns));
   }, [columns]);
 
   const sensors = useSensors(
@@ -38,7 +38,7 @@ function KanbanBoard() {
       activationConstraint: {
         distance: 1,
       },
-    })
+    }),
   );
 
   const handleAddColumn = () => {
@@ -49,11 +49,11 @@ function KanbanBoard() {
     if (event.active.data.current === undefined) return;
     const itemType = event.active.data.current.type;
 
-    if (itemType === 'column') {
+    if (itemType === "column") {
       setActiveColumn(event.active.data.current.column);
       return;
     }
-    if (itemType === 'task-item') {
+    if (itemType === "task-item") {
       setActiveTask(event.active.data.current.task);
       return;
     }
@@ -68,9 +68,9 @@ function KanbanBoard() {
     if (event.active.data.current === undefined) return;
     const itemType = event.active.data.current.type;
 
-    if (itemType === 'column') {
+    if (itemType === "column") {
       const activeIndex = columns.findIndex(
-        (column) => column.id === active.id
+        (column) => column.id === active.id,
       );
       const overIndex = columns.findIndex((column) => column.id === over.id);
 
@@ -83,10 +83,10 @@ function KanbanBoard() {
     if (!over) return;
     if (active.id === over.id) return;
 
-    const isActiveATaskItem = active.data.current?.type === 'task-item';
+    const isActiveATaskItem = active.data.current?.type === "task-item";
     if (!isActiveATaskItem) return;
 
-    if (over.data.current?.type === 'task-item') {
+    if (over.data.current?.type === "task-item") {
       //Drag over an item
       const activeParentId = active.data.current?.parentId;
       const overParentId = over.data.current?.parentId;
@@ -98,12 +98,12 @@ function KanbanBoard() {
             fromId: activeId,
             toId: overId,
             parentId: activeParentId,
-          })
+          }),
         );
       }
       return;
     }
-    if (over.data.current?.type === 'column') {
+    if (over.data.current?.type === "column") {
       //Drag over a column
       const activeId = active.data.current?.task.id;
       const overId = over.data.current?.column.id;
@@ -116,14 +116,14 @@ function KanbanBoard() {
         kanbanActions.moveTaskToColumn({
           columnId: overId,
           taskId: activeId,
-        })
+        }),
       );
     }
   };
-
   return (
-    <div className="min-h-screen flex items-center w-full max-w-[100rem] mx-auto ">
-      <div className="flex items-start min-w-full gap-3 overflow-x-scroll  pb-12 lg:flex-col lg:items-center lg:mt-16">
+    <div className="min-h-screen flex items-start w-full max-w-[100rem] mx-auto ">
+      {/* Ensure horizontal layout */}
+      <div className="flex items-start min-w-full gap-3 overflow-x-auto pb-12">
         <DndContext
           sensors={sensors}
           onDragStart={handleDragStart}
@@ -143,11 +143,13 @@ function KanbanBoard() {
             {activeTask && <KanbanTaskItem task={activeTask} />}
           </DragOverlay>
         </DndContext>
+
+        {/* Add Column Button */}
         <button
           onClick={handleAddColumn}
-          className="bg-slate-900  whitespace-nowrap px-4 py-2 rounded-md border border-transparent hover:border-red-500 transition-all"
+          className="bg-slate-900 text-white px-4 py-2 rounded-md border border-transparent hover:border-red-500 transition-all"
         >
-          Add Column
+          Create Column
         </button>
       </div>
     </div>

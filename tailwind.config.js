@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+module.exports = {
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
-    screens: {
-      lg: { max: '1023px' },
-      // => @media (max-width: 1023px) { ... }
+    extend: {
+      colors: {
+        csunRed: "#CC0000",
+        csunGray: "#F5F5F5",
+      },
     },
   },
   plugins: [],
