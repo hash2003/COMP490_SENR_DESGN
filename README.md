@@ -53,7 +53,7 @@ CREATE DATABASE matadorboard;
 
 - Import the provided SQL backup:
 ```
-sql-backups/matadorboard_backup_april14.sql
+sql-backups/Dump20250414.sql
 ```
 
 ---
