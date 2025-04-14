@@ -26,48 +26,48 @@ Professor Jeffrey A. Wiegley's Kanban Board Project
 
 ## Installing Keycloak
 - Follow this guide: https://medium.com/@henry.martinez.713/installing-keycloak-on-a-windows-machine-2993b96f2834
-- ## Running The Project Locally (Backend, Frontend, SQL Setup)
 
-### 1. Clone This Repo
+## How to Run Locally
 
+### 1. Navigate into project folder
 ```
-git clone https://github.com/hash2003/COMP490_SENR_DESGN.git
+cd newest_kanban_demo3
 ```
 
 ---
 
-### 2. MySQL Database Setup
+### 2. Install Dependencies
+```
+npm install
+```
 
-#### A) Create the Database in MySQL Workbench
+---
 
+### 3. Setup MySQL Database
+
+- Open MySQL Workbench
+- Create a database:
 ```
 CREATE DATABASE matadorboard;
 ```
 
-#### B) Import The SQL File
-
-- Open MySQL Workbench
-- Go to: Server → Data Import
-- Import from Self-Contained File:
+- Import the provided SQL backup:
 ```
-sql-backups/Dump20250414.sql
+sql-backups/matadorboard_backup_april14.sql
 ```
-- Select the database: `matadorboard`
-- Click Start Import
 
 ---
 
-#### C) Change Database Credentials In Code
+### 4. Configure Database Connection
 
-Go to:
+Edit the file:
 ```
-backend/db.js
+db.js
 ```
 
-Update with your MySQL info:
-
-```
-const db = mysql.createConnection({
+Update:
+```javascript
+const pool = mysql.createPool({
   host: 'localhost',
   user: 'YOUR_MYSQL_USERNAME',
   password: 'YOUR_MYSQL_PASSWORD',
@@ -77,64 +77,32 @@ const db = mysql.createConnection({
 
 ---
 
-### 3. Running Backend (Express API)
-
-Go into backend folder:
-
-```
-cd backend
-```
-
-Install node modules:
-
-```
-npm install
-```
-
-Run the backend server:
-
-```
-node app.js
-```
-
-Runs at:
-```
-http://localhost:5001
-```
-
----
-
-### 4. Running Frontend (React)
-
-Go into frontend folder:
-
-```
-cd frontend
-```
-
-Install node modules:
-
-```
-npm install
-```
-
-Run frontend:
-
+### 5. Run the Application
 ```
 npm run dev
 ```
 
-Runs at:
+---
+
+## 6. Access the Application
+
+- Frontend (React/Vite):
 ```
-http://localhost:3000
+http://localhost:5173/
+```
+
+- Backend API (Express/Node):
+```
+http://localhost:5001/
 ```
 
 ---
 
-### Notes:
-- Backend → Node.js + Express + MySQL
-- Frontend → React + Vite + Tailwind
-- SQL Database → `matadorboard`
-- Must run backend & frontend separately
-- Must install node modules in both frontend & backend using `npm install`
-
+## Notes
+- `.env` file not required
+- If you run into any node module issues:
+```
+cd newest_kanban_demo3
+rm -rf node_modules
+npm install
+```
