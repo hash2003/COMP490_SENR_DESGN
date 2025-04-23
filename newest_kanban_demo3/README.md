@@ -12,7 +12,7 @@ I have used Redux, TailwindCSS and dnd-kit library for drag and drop operations.
 ## To Run the Code Locally
 
 ```
-git clone https://github.com/barishazar3431/react-kanban-board
+git clone https://github.com/hash2003/COMP490_SENR_DESGN/tree/main/newest_kanban_demo3
 
 cd desktop\comp 491\matadorboard local setup\react-kanban-board
 
